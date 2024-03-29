@@ -8,21 +8,26 @@ import binemployee.model.repository.CityRepo;
 
 public class BranchOfficeService {
 
+    private static BranchOfficeService instance;
     private final BranchOfficeRepo branchOfficeRepo;
     private final CityRepo cityRepo;
 
-    public BranchOfficeService(BranchOfficeRepo branchOfficeRepo, CityRepo cityRepo) {
-        this.branchOfficeRepo = branchOfficeRepo;
-        this.cityRepo = cityRepo;
+    public BranchOfficeService() {
+        this.branchOfficeRepo = BranchOfficeRepo.getInstance();
+        this.cityRepo = CityRepo.getInstance();
+    }
+
+    public static BranchOfficeService getInstance() {
+        if (instance == null) {
+            instance = new BranchOfficeService();
+        }
+        return instance;
     }
 
     public void addBranchOffice(BranchOfficeDTO dto) {
-        String address = dto.getAddress();
-        if (address == null || address.trim().isEmpty()) {
-            throw new IllegalArgumentException("branch office address is required");
-        }
+        String address = dto.address().trim();
 
-        City city = cityRepo.findById(dto.getCityId());
+        City city = cityRepo.findById(dto.cityId());
         if (city == null) {
             throw new IllegalArgumentException("city not found");
         }

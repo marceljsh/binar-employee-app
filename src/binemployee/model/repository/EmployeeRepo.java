@@ -8,11 +8,19 @@ import java.util.concurrent.atomic.AtomicLong;
 
 public class EmployeeRepo {
 
+    private static EmployeeRepo instance;
     private final Map<Long, Employee> employeeStore;
     private final AtomicLong sequence = new AtomicLong();
 
     public EmployeeRepo() {
         employeeStore = new HashMap<>();
+    }
+
+    public static EmployeeRepo getInstance() {
+        if (instance == null) {
+            instance = new EmployeeRepo();
+        }
+        return instance;
     }
 
     public void save(Employee employee) {

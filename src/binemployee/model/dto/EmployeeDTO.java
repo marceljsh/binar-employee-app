@@ -1,21 +1,21 @@
 package binemployee.model.dto;
 
-import lombok.Getter;
-
 import java.time.LocalDate;
 
-@Getter
-public class EmployeeDTO {
+public record EmployeeDTO(String fullName, LocalDate birthDate, String address, long branchOfficeId) {
 
-    private String fullName;
-    private LocalDate birthDate;
-    private String address;
-    private long branchOfficeId;
-
-    public EmployeeDTO(String fullName, LocalDate birthDate, String address, long branchOfficeId) {
-        this.fullName = fullName;
-        this.birthDate = birthDate;
-        this.address = address;
-        this.branchOfficeId = branchOfficeId;
+    public EmployeeDTO {
+        if (fullName == null || fullName.isBlank()) {
+            throw new IllegalArgumentException("Full name cannot be null or empty");
+        }
+        if (birthDate == null) {
+            throw new IllegalArgumentException("Birth date cannot be null");
+        }
+        if (address == null || address.isBlank()) {
+            throw new IllegalArgumentException("Address cannot be null or empty");
+        }
+        if (branchOfficeId <= 0) {
+            throw new IllegalArgumentException("Branch office id must be greater than 0");
+        }
     }
 }

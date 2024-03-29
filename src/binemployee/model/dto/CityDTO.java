@@ -1,13 +1,9 @@
 package binemployee.model.dto;
 
-import lombok.Getter;
-
-@Getter
-public class CityDTO {
-
-    private String name;
-
-    public CityDTO(String name) {
-        this.name = name;
+public record CityDTO(String name) {
+    public CityDTO {
+        if (name == null || name.isBlank()) {
+            throw new IllegalArgumentException("City name cannot be null or empty");
+        }
     }
 }

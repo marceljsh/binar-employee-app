@@ -6,12 +6,6 @@ import binemployee.controller.EmployeeController;
 import binemployee.model.dto.BranchOfficeDTO;
 import binemployee.model.dto.CityDTO;
 import binemployee.model.dto.EmployeeDTO;
-import binemployee.model.repository.BranchOfficeRepo;
-import binemployee.model.repository.CityRepo;
-import binemployee.model.repository.EmployeeRepo;
-import binemployee.service.BranchOfficeService;
-import binemployee.service.CityService;
-import binemployee.service.EmployeeService;
 
 import java.time.LocalDate;
 
@@ -23,7 +17,6 @@ public class App {
 
     public void run() {
         init();
-        seed();
 
         cityController.getAllCity().forEach(System.out::println);
         branchOfficeController.getAllBranchOffice().forEach(System.out::println);
@@ -31,17 +24,11 @@ public class App {
     }
 
     public void init() {
-        CityRepo cityRepo = new CityRepo();
-        BranchOfficeRepo branchOfficeRepo = new BranchOfficeRepo();
-        EmployeeRepo employeeRepo = new EmployeeRepo();
+        cityController = new CityController();
+        branchOfficeController = new BranchOfficeController();
+        employeeController = new EmployeeController();
 
-        CityService cityService = new CityService(cityRepo);
-        BranchOfficeService branchOfficeService = new BranchOfficeService(branchOfficeRepo, cityRepo);
-        EmployeeService employeeService = new EmployeeService(employeeRepo, branchOfficeRepo);
-
-        cityController = new CityController(cityService);
-        branchOfficeController = new BranchOfficeController(branchOfficeService);
-        employeeController = new EmployeeController(employeeService);
+        seed();
     }
 
     private void seed() {

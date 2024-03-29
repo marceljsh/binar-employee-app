@@ -1,15 +1,13 @@
 package binemployee.model.dto;
 
-import lombok.Getter;
+public record BranchOfficeDTO(long cityId, String address) {
 
-@Getter
-public class BranchOfficeDTO {
-
-    private long cityId;
-    private String address;
-
-    public BranchOfficeDTO(long cityId, String address) {
-        this.cityId = cityId;
-        this.address = address;
+    public BranchOfficeDTO {
+        if (address == null || address.isBlank()) {
+            throw new IllegalArgumentException("Address cannot be null or empty");
+        }
+        if (cityId <= 0) {
+            throw new IllegalArgumentException("City ID must be greater than 0");
+        }
     }
 }

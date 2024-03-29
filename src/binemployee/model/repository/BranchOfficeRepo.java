@@ -9,11 +9,19 @@ import java.util.concurrent.atomic.AtomicLong;
 
 public class BranchOfficeRepo {
 
+    private static BranchOfficeRepo branchOfficeRepo;
     private final Map<Long, BranchOffice> branchOfficeStore;
     private final AtomicLong sequence = new AtomicLong();
 
     public BranchOfficeRepo() {
         branchOfficeStore = new HashMap<>();
+    }
+
+    public static BranchOfficeRepo getInstance() {
+        if (branchOfficeRepo == null) {
+            branchOfficeRepo = new BranchOfficeRepo();
+        }
+        return branchOfficeRepo;
     }
 
     public void save(BranchOffice branchOffice) {

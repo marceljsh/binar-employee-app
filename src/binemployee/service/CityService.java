@@ -6,25 +6,23 @@ import binemployee.model.repository.CityRepo;
 
 public class CityService {
 
+    private static CityService instance;
     private final CityRepo cityRepo;
 
     public CityService() {
-        this.cityRepo = new CityRepo();
+        this.cityRepo = CityRepo.getInstance();
     }
 
-    public CityService(CityRepo cityRepo) {
-        this.cityRepo = cityRepo;
-    }
-
-    public City addCity(CityDTO dto) {
-        String cityName = dto.getName();
-        if (cityName == null || cityName.trim().isEmpty()) {
-            throw new IllegalArgumentException("city name is required");
+    public static CityService getInstance() {
+        if (instance == null) {
+            instance = new CityService();
         }
+        return instance;
+    }
 
-        City city = new City(cityName);
-
-        return cityRepo.save(city);
+    public void addCity(CityDTO dto) {
+        String cityName = dto.name().trim();
+        cityRepo.save(new City(cityName));
     }
 
     public Iterable<City> getAllCity() {

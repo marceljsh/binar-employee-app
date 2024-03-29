@@ -9,15 +9,11 @@ public class CityController {
     private final CityService cityService;
 
     public CityController() {
-        this.cityService = new CityService();
+        this.cityService = CityService.getInstance();
     }
 
-    public CityController(CityService cityService) {
-        this.cityService = cityService;
-    }
-
-    public City createCity(CityDTO cityDTO) {
-        return cityService.addCity(cityDTO);
+    public void createCity(CityDTO cityDTO) {
+        cityService.addCity(cityDTO);
     }
 
     public Iterable<City> getAllCity() {

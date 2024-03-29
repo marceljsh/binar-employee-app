@@ -16,10 +16,6 @@ public class Employee extends BaseEntity {
     private Status status;
     private BranchOffice branchOffice;
 
-    public Employee() {
-        super();
-    }
-
     public Employee(String fullName, LocalDate birthDate, String address, BranchOffice branchOffice) {
         super();
 

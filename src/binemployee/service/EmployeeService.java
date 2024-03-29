@@ -10,34 +10,30 @@ import java.time.LocalDate;
 
 public class EmployeeService {
 
+    private static EmployeeService instance;
     private final EmployeeRepo employeeRepo;
     private final BranchOfficeRepo branchOfficeRepo;
 
-    public EmployeeService(EmployeeRepo employeeRepo, BranchOfficeRepo branchOfficeRepo) {
-        this.employeeRepo = employeeRepo;
-        this.branchOfficeRepo = branchOfficeRepo;
+    public EmployeeService() {
+        this.employeeRepo = EmployeeRepo.getInstance();
+        this.branchOfficeRepo = BranchOfficeRepo.getInstance();
+    }
+
+    public static EmployeeService getInstance() {
+        if (instance == null) {
+            instance = new EmployeeService();
+        }
+        return instance;
     }
 
     public void addEmployee(EmployeeDTO dto) {
-        String fullName = dto.getFullName();
-        if (fullName == null || fullName.trim().isEmpty()) {
-            throw new IllegalArgumentException("employee full name is required");
-        }
+        String fullName = dto.fullName().trim();
 
-        LocalDate birthDate = dto.getBirthDate();
-        if (birthDate == null) {
-            throw new IllegalArgumentException("employee birth date is required");
-        }
+        LocalDate birthDate = dto.birthDate();
 
-        String address = dto.getAddress();
-        if (address == null || address.trim().isEmpty()) {
-            throw new IllegalArgumentException("employee address is required");
-        }
+        String address = dto.address().trim();
 
-        long branchOfficeId = dto.getBranchOfficeId();
-        if (branchOfficeId <= 0) {
-            throw new IllegalArgumentException("branch office id is required");
-        }
+        long branchOfficeId = dto.branchOfficeId();
 
         BranchOffice branchOffice = branchOfficeRepo.findById(branchOfficeId);
         if (branchOffice == null) {

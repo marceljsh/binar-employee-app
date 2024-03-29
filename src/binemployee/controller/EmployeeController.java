@@ -8,8 +8,8 @@ public class EmployeeController {
 
     private final EmployeeService employeeService;
 
-    public EmployeeController(EmployeeService employeeService) {
-        this.employeeService = employeeService;
+    public EmployeeController() {
+        this.employeeService = EmployeeService.getInstance();
     }
 
     public void createEmployee(EmployeeDTO dto) {

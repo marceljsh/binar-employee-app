@@ -8,8 +8,8 @@ public class BranchOfficeController {
 
     private final BranchOfficeService branchOfficeService;
 
-    public BranchOfficeController(BranchOfficeService branchOfficeService) {
-        this.branchOfficeService = branchOfficeService;
+    public BranchOfficeController() {
+        this.branchOfficeService = BranchOfficeService.getInstance();
     }
 
     public void createBranchOffice(BranchOfficeDTO dto) {

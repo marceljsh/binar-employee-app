@@ -9,10 +9,6 @@ public class City extends BaseEntity {
 
     private String name;
 
-    public City() {
-        super();
-    }
-
     public City(String name) {
         super();
         this.name = name;
