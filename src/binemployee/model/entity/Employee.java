@@ -1,5 +1,6 @@
 package binemployee.model.entity;
 
+import binemployee.common.Auditable;
 import binemployee.utils.Status;
 import lombok.Getter;
 import lombok.Setter;
@@ -8,7 +9,7 @@ import java.time.LocalDate;
 
 @Getter
 @Setter
-public class Employee extends BaseEntity {
+public class Employee extends Auditable {
 
     private String fullName;
     private LocalDate birthDate;

@@ -1,23 +1,21 @@
-package binemployee.model.entity;
+package binemployee.common;
 
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 @Getter
 @Setter
-public abstract class BaseEntity {
+public abstract class Auditable {
 
     private Long id;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
     private LocalDateTime deletedAt;
 
-    protected BaseEntity() {
+    protected Auditable() {
         createdAt = LocalDateTime.now();
     }
 

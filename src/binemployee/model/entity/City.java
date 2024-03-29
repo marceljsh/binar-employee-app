@@ -1,11 +1,12 @@
 package binemployee.model.entity;
 
+import binemployee.common.Auditable;
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter
 @Setter
-public class City extends BaseEntity {
+public class City extends Auditable {
 
     private String name;
 
